@@ -4,7 +4,7 @@
 # Sekilas Tentang
 [`^ kembali ke atas ^`](#)
 
-**ihatemoney** adalah aplikasi web untuk memudahkan pengaturan anggaran bersama. Aplikasi ini akan mencatat siapa yang membeli apa, kapan, di mana, dan untuk siapa, serta tentunya merapikan tagihan! **ihatemoney** dibangun agar mudah digunakan serta dibuat sesederhana mungkin.
+**ihatemoney** adalah aplikasi web untuk memudahkan pengaturan anggaran bersama. Aplikasi ini akan mencatat siapa yang membeli apa, kapan, di mana, dan untuk siapa, serta tentunya juga dapat merapikan tagihan. **ihatemoney** dibangun agar mudah digunakan serta dibuat sesederhana mungkin.
 
 
 # Instalasi
@@ -191,7 +191,7 @@ Cara kedua adalah dengan menggunakan layanan yang tersedia pada *web-hosting pro
 # Cara Pemakaian
 [`^ kembali ke atas ^`](#)
 
-Saat memasuki web, kita akan disuguhkan loleh tampilan yang sederhana seperti ini:
+Saat memasuki web, kita akan disuguhkan oleh tampilan yang sederhana seperti gambar di bawah ini:
 <img src="https://user-images.githubusercontent.com/70634108/196365124-f11b9d5e-23dc-420b-b9b5-174743d79876.png" width="600px" height="auto"></br>
 Terdapat dua pilihan yaitu masuk ke project yang sudah ada, atau membuat project baru, kita asumsikan kita akan membuat project baru di sini
 1. Membuat project baru.
