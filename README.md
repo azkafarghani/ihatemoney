@@ -200,45 +200,41 @@ Terdapat dua pilihan yaitu masuk ke project yang sudah ada, atau membuat project
 
 
 
-2. Setelah membuat project baru, kita akan masuk ke halaman utama untuk menambah tagihan
+2. Setelah membuat project baru, kita akan masuk ke halaman utama untuk menambah tagihan. Pada bagian atas terdapat berbagai menu yang dapat kita gunakan.
 
     <img src="https://user-images.githubusercontent.com/70634108/196369320-4f96bcfb-ea1b-4bb3-b87f-52460c291f9a.png" width="600px" height="auto">
 
 
-3. Pada bagian samping kiri, terdapat berbagai menu yang dapat kita gunakan. Menu **Order** berguna untuk mengetahui informasi lebih detail tentang penjualan pada website kita. Disini kita dapat mencetak *invoices, credit slips, delivery slips*, dan lain-lain.
+3. Pada bagian samping kiri, terdapat menu untuk menambah pertisipant. Lalu pada menu tagihan kita mencoba menambahkan nama agar sistem keuangannya dapat digunakan dengan baik.  
 
-    <img src="https://user-images.githubusercontent.com/78604686/196495786-9422250f-12cb-464e-9b04-48b0988677b5.png" width="600px" height="auto">
+    <img src="https://user-images.githubusercontent.com/78604686/196496445-20a12c8e-2deb-4b85-8290-9884d9f1ef72.png" width="600px" height="auto">
     
-4. Menu **Catalog** berguna untuk mengetahui informasi lebih detail tentang barang apa saja yang dijual pada website kita, kategori apa saja yang ada, mengawasi stok barang yang tersisa, merek apa saja yang ada, melihat daftar diskon, dan lain-lain.
+4. Menu **Tagihan** tersebut berguna untuk menambahkan daftar tagihan yang terdiri dari keterangan kapan, apa, siapa yang bayar, berapa banyak, untuk siapa dan dengan opsi tambahan lainnya.
 
-    ![catalog](https://4.bp.blogspot.com/-PQTBdZzcMBY/WOGblDw9tYI/AAAAAAAAGlk/GDC7cEzfWmo9LZ8bqcqwnv7iilAYlXNhwCLcB/s1600/presta4.png)
+    <img src="https://user-images.githubusercontent.com/78604686/196498933-79f1dbc7-7a4a-4e0a-adae-3cf47d07a8e5.png" width="600px" height="auto">
 
-5. Menu **Customers** berguna untuk melihat informasi lebih detail tentang daftar pelanggan kita dan alamatnya.
+5. Menu **Atur** berguna untuk melihat informasi lebih detail tentang siapa yang membayar, kepada siapa, dan berapa banyak uang yang harus dibayarkan.
 
-    ![customer](https://2.bp.blogspot.com/-Mtss0c3rblo/WOGblcDU_bI/AAAAAAAAGlo/u1Hv6LWzwtAEuk9_NPQHnedI6PnotkEMwCLcB/s1600/presta5.png)
+    <img src="https://user-images.githubusercontent.com/78604686/196500150-7c29c7ae-2362-4c27-99aa-7cfa4ebedcd3.png" width="600px" height="auto">
 
-6. Menu **Customer Service** berguna untuk mengatur hubungan dengan pelanggan, seperti menerima keluhan, mengirim pesan kepada pelanggan, pengembalian barang, dan lain-lain.
+6. Menu **Statistik** berguna untuk meihat informasi lebih detail tentang berapa uang yang dibayarkan, uang yang dihabiskan dan juga pengeluaran menurut bulan.
 
-    ![cs](https://3.bp.blogspot.com/-ZlT_WQ0bpyk/WOGblYW-yPI/AAAAAAAAGls/gcZb8k36rEUn8dDFnGXl35R_Uhy_lNMeACLcB/s1600/presta6.png)
+    <img src="https://user-images.githubusercontent.com/78604686/196500719-4b539a27-e7fe-4ae8-805b-4eb435755d75.png" width="600px" height="auto">
 
-7. Menu **Stat** berguna untuk melihat informasi lebih detail dari website kita, seperti jumlah pengunjung setiap harinya, lokasi pelanggan terbanyak, barang apa yang populer, dan lain-lain.
+7. Selain menu-menu yang berhubungan dengan pencatatan keuangan, **ihatemoney** juga menyediakan menu untuk memilih bahasa yang akan digunakan di web ini sesuai dengan kemampuan berbahasa dari pengguna.
 
-    ![stat](https://3.bp.blogspot.com/-kvZ9MMH6Fxc/WOGblsk5jpI/AAAAAAAAGlw/p8LhO5LIvMU4WnDEF5NKg7--tKy8mWa-wCLcB/s1600/presta7.png)
+    <img src="https://user-images.githubusercontent.com/78604686/196501951-711c9871-6a02-4c60-9896-9fd6f6a0814a.png" width="600px" height="auto">
 
-8. Selain menu-menu yang berhubungan dengan penjualan, **Prestashop** juga menyediakan menu untuk meningkatkan performa website kita seperti menu untuk menginstal modul atau plugin, menu untuk memperindah tampilan website, menu untuk mengatur pengiriman dan pembayaran barang, bahkan menu lokalisasi untuk meningkatkan layanan pada region tertentu.
+8. Selain itu, terdapat juga menu untuk menambah projek baru, melihat riwayat penggunaan web oleh user, dan juga menu pengaturan.
 
-    ![improve](https://3.bp.blogspot.com/-d_DufFiAblk/WOGbls1KYxI/AAAAAAAAGl0/AsyvLt1zp1IP1BG1PbDaG91PJKV-xDkhACLcB/s1600/presta8.png)
-
-9. Selain itu, terdapat juga menu untuk mempermudah konfigurasi website kita baik itu konfigurasi umum maupun konfigurasi lanjut.
-
-    ![configure](https://4.bp.blogspot.com/-58ke7QyDUwQ/WOGbmCZvHFI/AAAAAAAAGl4/LuQRv6uYmywWjbzmJy82UwNu5qCg8fp1gCLcB/s1600/presta9.png)
+    <img src="https://user-images.githubusercontent.com/78604686/196502878-1a5ce750-3450-44c7-be65-243a51f8c81d.png" width="600px" height="auto">v
 
 
 
 # Pembahasan
 [`^ kembali ke atas ^`](#)
 
-**Prestashop** ditulis dalam bahasa pemrograman `PHP` yang support untuk penggunaan MySQL. Sebagai salah satu CMS yang paling banyak digunakan di dunia, aplikasi ini menawarkan berbagai kelebihan, diantaranya :
+**ihatemoney** ditulis dalam bahasa pemrograman `PHP` yang support untuk penggunaan MySQL. Sebagai salah satu CMS yang paling banyak digunakan di dunia, aplikasi ini menawarkan berbagai kelebihan, diantaranya :
 - Aplikasi memiliki panel administrasinya mudah digunakan dan fleksibel, sehingga dapat disesuaikan dengan kebutuhan.
 - Mendukung berbagai layanan pembayaran utama, seperti `PayPal`, `VISA`, `MasterCard`, dan `Maestro`.
 - Diterjemahkan dalam banyak bahasa, termasuk Bahasa Indonesia.
