@@ -259,7 +259,7 @@ Jika dibandingkan dengan CMS sejenisnya seperti **Microweber**, CMS ini memiliki
 # Referensi
 [`^ kembali ke atas ^`](#)
 
-1. [About PrestaShop](https://www.prestashop.com/) - PrestaShop
+1. [About #ihatemoney](https://ihatemoney.org/) - ihatemoney
 2. [How to Log Into a VPS with PuTTY on Windows](https://www.digitalocean.com/community/tutorials/how-to-log-into-a-vps-with-putty-windows-users) - DigitalOcean
 3. [How to Install PrestaShop on Ubuntu 16.04](http://idroot.net/linux/install-prestashop-ubuntu-16-04/) - idroot
 4. [One Click Install PrestaShop](https://www.prestashop.com/blog/en/how-to-install-prestashop/) - PrestaShop
