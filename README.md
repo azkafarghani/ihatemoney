@@ -199,9 +199,8 @@ Terdapat dua pilihan yaitu masuk ke project yang sudah ada, atau membuat project
 - Pengguna dapat melihat semua riwayat aktivitas yang sudah dilakukan di dalam aplikasi.
 
 Tentu saja, sebuah aplikasi pasti memiliki kekurangan. Kekurangan yang dimiliki **ihatemoney** antara lain :
-- Penggunaan fitur atau modul yang lengkap menyebakan proses loading dari aplikasi ini menjadi sangat lambat
-- Penggunaan *resource* memory aplikasi ini cukup besar, terutama ketika menggunakan fitur atau modul yang lengkap.
-- Sebagian besar modul dan tema yang tersedia tidak gratis.
+- Pengguna harus menginput secara manual data-data yang akan digunakan sehingga jika ada kesalahan input akan menimbulkan kesalahan dalam perhitungan juga.
+- Belum banyak orang yang mengetahui tentang aplikasi ini.
 
 Jika dibandingkan dengan CMS sejenisnya seperti **Microweber**, CMS ini memiliki beberapa keunggulan dan kelemahan. Berikut adalah beberapa perbandingan antara kedua CMS ini :
 - **Microweber** menyediakan proses design yang fleksibel dengan fitur *Drag and Drop* tanpa batasan, sehingga pengguna bebas mengkreasikan tampilan websitenya. Sedangkan **Prestashop** hanya menyediakan fitur design berupa penggantian template dan logo, adapun template yang tersedia tidak gratis.
