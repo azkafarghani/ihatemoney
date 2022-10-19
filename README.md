@@ -99,20 +99,8 @@
     [Install]
     WantedBy=multi-user.target
     ```
-
-    
-
-    -Edit file `etc/php/7.0/apache2/php.ini` dan tambahkan baris berikut :
-    ```
-    memory_limit = 128M
-    upload_max_filesize = 16M
-    max_execution_time = 60
-    file_uploads = On
-    allow_url_fopen = On
-    magic_quotes_gpc = Off
-    register_globals = Off
-    ```
     %h pada ExecStart diganti dengan path direktori folder ihatemoney
+    
     -Reload systemd dan aktifkan ihatemoney
     ```
     $ systemctl daemon-reload
