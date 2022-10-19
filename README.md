@@ -11,35 +11,40 @@
 [`^ kembali ke atas ^`](#)
 
 #### Kebutuhan Sistem :
--Python : versi 3.6 - 3.10
--DBMS : PostgreSQL
--Virtual Environment : Python3 venv
--WSGI : Gunicorn
--Web Server : Nginx
+- Python : versi 3.6 - 3.10
+- DBMS : PostgreSQL
+- Virtual Environment : Python3 venv
+- WSGI : Gunicorn
+- Web Server : Nginx
 
 #### Instalasi :
 1. Membuat *python virtual environment*
+
     ```
     $ python3 -m venv ~/ihatemoney
     $ cd ihatemoney
     ```
 
 2. Aktivasi *virtual environment*
+
     ```
     $ source bin/activate
     ```
 
 3. Install *package* ihatemoney
+
     ```
     $ pip install ihatemoney
     ```
 
 4. Coba jalankan
+
     ```
     $ ihatemoney runserver
     ```
 
 5. *Generate file* konfigurasi
+
     ```
     $ mkdir /etc/ihatemoney /var/lib/ihatemoney
     $ ihatemoney generate-config ihatemoney.cfg > /etc/ihatemoney/ihatemoney.cfg
@@ -48,42 +53,49 @@
 
 6. Konfigurasi PostgreSQL
 
-    -Install package python untuk PostgreSQL
+    - Install package python untuk PostgreSQL
+    
     ```
     $ pip install psycopg2-binary==2.8.6
     ```
-    -Masuk ke postgreSQL inactive
+    - Masuk ke postgreSQL inactive
+    
     ```
     $ sudo -u postgres psql
     ```
-    -Buat user dan database
+    - Buat user dan database
+    
     ```
     $ create database mydb;
     $ create user myuser with encrypted password 'mypass';
     $ grant all privileges on database mydb to myuser;
     $ \q
     ```
-    -Edit konfigurasi database ihatemoney
+    - Edit konfigurasi database ihatemoney
     Edit file /etc/ihatemoney/ihatemoney.cfg dengan mengganti value dari variabel 
     SQLALCHEMY_DATABASE_URI menjadi:
+    
     ```
     SQLALCHEMY_DATABASE_URI = 'postgresql://myuser:mypass@localhost/mydb?client_encoding=utf8'
     ```
 
 7. Konfigurasi reverse proxy
     
-    -Buat user khusus, direktori, dan atur permissions
+    - Buat user khusus, direktori, dan atur permissions
+    
     ```
     $ useradd ihatemoney
     $ chown ihatemoney /var/lib/ihatemoney/
     $ chgrp ihatemoney /etc/ihatemoney/ihatemoney.cfg
     ```
-    -Buat file konfigurasi gunicorn
+    - Buat file konfigurasi gunicorn
+    
     ```
     $ ihatemoney generate-config gunicorn.conf.py > /etc/ihatemoney/gunicorn.conf.py
     ```
-    -Buat file
+    - Buat file
     /etc/systemd/system/ihatemoney.service dengan isi:
+    
     ```
     [Unit]
     Description=I hate money
@@ -101,28 +113,33 @@
     ```
     %h pada ExecStart diganti dengan path direktori folder ihatemoney
     
-    -Reload systemd dan aktifkan ihatemoney
+    - Reload systemd dan aktifkan ihatemoney
+    
     ```
     $ systemctl daemon-reload
     $ systemctl enable ihatemoney.service
     $ systemctl start ihatemoney.service
     ```
-    -Generate konfigurasi nginx
+    - Generate konfigurasi nginx
+    
     ```
     $ ihatemoney generate-config nginx.conf > /etc/nginx/sites-available/ihatemoney
     $ rm /etc/nginx/sites-enabled/default
     $ ln -s /etc/nginx/sites-available/ihatemoney /etc/nginx/sites-enabled/ihatemoney
     ```
-    -Edit konfigurasi nginx sesuai kebutuhan 
+    - Edit konfigurasi nginx sesuai kebutuhan 
     Menggunakan nano
+    
     ```
     $ nano /etc/nginx/sites-available/ihatemoney
     ```
     Menggunakan vim
+    
     ```
     $ vim /etc/nginx/sites-available/ihatemoney
     ```
     Lakukan pengecekan sintaks dan reload nginx setiap mengubah konfigurasi
+    
     ```
     $ nginx -t
     $ nginx -s reload
