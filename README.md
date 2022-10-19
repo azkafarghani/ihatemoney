@@ -11,78 +11,98 @@
 [`^ kembali ke atas ^`](#)
 
 #### Kebutuhan Sistem :
-- Unix, Linux atau Windows.
-- Apache Web server 1.3+.
-- PHP 5.2+.
-- MySQL 5.0+.
-- RAM minimal 64 Mb+
+-Python : versi 3.6 - 3.10
+-DBMS : PostgreSQL
+-Virtual Environment : Python3 venv
+-WSGI : Gunicorn
+-Web Server : Nginx
 
-#### Proses Instalasi :
-1. Login kedalam server menggunakan SSH. Untuk pengguna windows bisa menggunakan aplikasi [PuTTY](http://www.putty.org/).
+#### Instalasi :
+1. Membuat *python virtual environment*
     ```
-    $ ssh adam@172.18.88.88 -p 22
-    ```
-
-2. Pastikan seluruh paket sistem kita *up-to-date*, dan install seluruh kebutuhan sisrem seperti `Apache`, `PHP`, dan `MySQL`.
-    ```
-    $ sudo apt-get update
-    $ sudo apt-get install apache2
-    $ sudo apt-get install mysql-server
-    $ sudo apt-get install php
-    $ sudo apt-get install libapache2-mod-php
-    $ sudo apt-get install php-mysql
-    $ sudo apt-get install php-gd php-mcrypt php-mbstring php-xml php-ssh2 php-curl php-zip php-intl
-    $ sudo apt-get install unzip
+    $ python3 -m venv ~/ihatemoney
+    $ cd ihatemoney
     ```
 
-3. Unduh **Prestashop** ke dalam direktori kita. 
+2. Aktivasi *virtual environment*
     ```
-    $ wget https://download.prestashop.com/download/releases/prestashop_1.7.0.5.zip
-    ```
-
-4. Ekstrak file yang telah diunduh ke dalam direktori yang kita inginkan.
-    ```
-    $ sudo unzip prestashop_1.7.0.5.zip -d /var/www/html/prestashop
+    $ source bin/activate
     ```
 
-5. Ubah otorisasi kepemilikan ke user www-data (webserver)
+3. Install *package* ihatemoney
     ```
-    $ sudo chown -R www-data:www-data /var/www/html/prestashop
-    ```
-
-6. Buat database dan user untuk **Prestashop**.
-    ```
-    $ mysql -u root -p -v -e "
-        CREATE DATABASE prestashop;
-        CREATE USER 'prestashopuser'@'localhost' IDENTIFIED BY 'prestashoppassword';
-        GRANT ALL PRIVILEGES ON `prestashop`.* TO 'prestashopuser'@'localhost';
-        FLUSH PRIVILEGES;"
+    $ pip install ihatemoney
     ```
 
-7. Konfigurasi Apache web server.
+4. Coba jalankan
     ```
-    $ sudo a2enmod rewrite
-    $ sudo touch /etc/apache2/sites-available/prestashop.conf
-    $ sudo ln -s /etc/apache2/sites-available/prestashop.conf /etc/apache2/sites-enabled/prestashop.conf
-    $ sudo nano /etc/apache2/sites-available/prestashop.conf
-
-    <VirtualHost *:80>
-    ServerAdmin admin@your-domain.com
-    DocumentRoot /var/www/html/prestashop/
-    ServerName your-domain.com
-    ServerAlias www.your-domain.com
-    <Directory /var/www/html/prestashop/>
-    Options FollowSymLinks
-    AllowOverride All
-    Order allow,deny
-    allow from all
-    </Directory>
-    ErrorLog /var/log/apache2/your-domain.com-error_log
-    CustomLog /var/log/apache2/your-domain.com-access_log common
-    </VirtualHost>
+    $ ihatemoney runserver
     ```
 
-8. Edit file `etc/php/7.0/apache2/php.ini` dan tambahkan baris berikut :
+5. *Generate file* konfigurasi
+    ```
+    $ mkdir /etc/ihatemoney /var/lib/ihatemoney
+    $ ihatemoney generate-config ihatemoney.cfg > /etc/ihatemoney/ihatemoney.cfg
+    $ chmod 740 /etc/ihatemoney/ihatemoney.cfg
+    ```
+
+6. Konfigurasi PostgreSQL
+
+    -Install package python untuk PostgreSQL
+    ```
+    $ pip install psycopg2-binary==2.8.6
+    ```
+    -Masuk ke postgreSQL inactive
+    ```
+    $ sudo -u postgres psql
+    ```
+    -Buat user dan database
+    ```
+    $ create database mydb;
+    $ create user myuser with encrypted password 'mypass';
+    $ grant all privileges on database mydb to myuser;
+    $ \q
+    ```
+    -Edit konfigurasi database ihatemoney
+    Edit file /etc/ihatemoney/ihatemoney.cfg dengan mengganti value dari variabel 
+    SQLALCHEMY_DATABASE_URI menjadi:
+    ```
+    SQLALCHEMY_DATABASE_URI = 'postgresql://myuser:mypass@localhost/mydb?client_encoding=utf8'
+    ```
+
+7. Konfigurasi reverse proxy
+    
+    -Buat user khusus, direktori, dan atur permissions
+    ```
+    $ useradd ihatemoney
+    $ chown ihatemoney /var/lib/ihatemoney/
+    $ chgrp ihatemoney /etc/ihatemoney/ihatemoney.cfg
+    ```
+    -Buat file konfigurasi gunicorn
+    ```
+    $ ihatemoney generate-config gunicorn.conf.py > /etc/ihatemoney/gunicorn.conf.py
+    ```
+    -Buat file
+    /etc/systemd/system/ihatemoney.service dengan isi:
+    ```
+    [Unit]
+    Description=I hate money
+    Requires=network.target postgresql.service
+    After=network.target postgresql.service
+
+    [Service]
+    Type=simple
+    User=ihatemoney
+    ExecStart=%h/ihatemoney/bin/gunicorn -c /etc/ihatemoney/gunicorn.conf.py     
+    ihatemoney.wsgi:application
+    SyslogIdentifier=ihatemoney
+    [Install]
+    WantedBy=multi-user.target
+    ```
+
+    
+
+    -Edit file `etc/php/7.0/apache2/php.ini` dan tambahkan baris berikut :
     ```
     memory_limit = 128M
     upload_max_filesize = 16M
@@ -92,101 +112,34 @@
     magic_quotes_gpc = Off
     register_globals = Off
     ```
-
-9. Restart kembali Apache web server.
+    %h pada ExecStart diganti dengan path direktori folder ihatemoney
+    -Reload systemd dan aktifkan ihatemoney
     ```
-    $ sudo service apache2 restart
+    $ systemctl daemon-reload
+    $ systemctl enable ihatemoney.service
+    $ systemctl start ihatemoney.service
     ```
-
-10. Kunjungi alamat IP web server kita untuk meneruskan instalasi.
-    - Pilih Bahasa yang akan digunakan
-
-      ![1](https://4.bp.blogspot.com/-4Bd2ScecDIs/WNfZ0H8j3UI/AAAAAAAAGjE/9f7Knlqzgw0a0Lgd2AVQ7Qt53bI-Of8bACLcB/s1600/36.PNG)
-
-    - Setujui persyaratan yang berlaku
-
-      ![2](https://4.bp.blogspot.com/-mglU1XDt-T0/WNfZ0OJ7n8I/AAAAAAAAGjI/bG23YpPUkyEOCiozy1_Qc4TnA29bJw0lACLcB/s1600/37.PNG)
-
-    - Cek kecocokan sistem
-
-      ![3](https://3.bp.blogspot.com/-ewzlTX1qtmw/WNfZ0HTeFuI/AAAAAAAAGjM/edNiBt1f24Qt4x4sWCoCHfyo7JXWWmoZwCLcB/s1600/38.PNG)
-
-    - Isi informasi tentang toko yang kita buat
-
-      ![4](https://2.bp.blogspot.com/-Q5cCz5hyubQ/WNfZ1FZod9I/AAAAAAAAGjU/H_uUfxtZLUE11VPDafwK8jR3-aealPKcgCLcB/s1600/39.png)
-
-    - Konfigurasi database
-
-      ![5](https://1.bp.blogspot.com/-rh08nNV2Leg/WNfZ1DAaDOI/AAAAAAAAGjY/R5oIKIMI4rYjg7gO71MgR26JSMahxtpxgCLcB/s1600/40.PNG)
-
-    - Lanjutkan proses instalasi
-
-      ![6](https://3.bp.blogspot.com/-t2MrsQBYXBU/WNfZ0x4YoWI/AAAAAAAAGjQ/zOqZVNSFIpQkQjY0awofbetdEowQLdGAwCLcB/s1600/41.PNG)
-
-11. Setelah proses instalasi selesai hapus direktori install untuk alasan keamanan.
+    -Generate konfigurasi nginx
     ```
-    $ sudo rm -rf /var/www/html/prestashop/install
+    $ ihatemoney generate-config nginx.conf > /etc/nginx/sites-available/ihatemoney
+    $ rm /etc/nginx/sites-enabled/default
+    $ ln -s /etc/nginx/sites-available/ihatemoney /etc/nginx/sites-enabled/ihatemoney
     ```
-
-
-
-# Konfigurasi
-[`^ kembali ke atas ^`](#)
-
-- Untuk menentukan konfigurasi umum, kuota upload, dan pemberitahuan, kita dapat membuka submenu **Administration** pada menu **Advanced Parameters** dan mengisi field sesuai kebutuhan. 
+    -Edit konfigurasi nginx sesuai kebutuhan 
+    Menggunakan nano
+    ```
+    $ nano /etc/nginx/sites-available/ihatemoney
+    ```
+    Menggunakan vim
+    ```
+    $ vim /etc/nginx/sites-available/ihatemoney
+    ```
+    Lakukan pengecekan sintaks dan reload nginx setiap mengubah konfigurasi
+    ```
+    $ nginx -t
+    $ nginx -s reload
+    ```
     
-    ![adv](https://1.bp.blogspot.com/-FVf16Vgl39w/WNgF9uD_R1I/AAAAAAAAGkI/SMY8oR4ZpDwNJAP4te0Ml0xCghuEYwQfQCLcB/s1600/Screenshot_6.jpg)
-
-    ![setting](https://1.bp.blogspot.com/-pPGnvOtpH6k/WNgF-bV6TcI/AAAAAAAAGkQ/i4X-qAe2ohcLT18UDAaA5tYDZGrri0nvQCLcB/s1600/ss.png)
-
-- Untuk melengkapi aplikasi, kita dapat menambahkan fitur atau modul-modul tertentu pada menu `Modules`.
-
-    ![modul](https://4.bp.blogspot.com/-6dRdIL2WQGw/WNfs8Ul0KnI/AAAAAAAAGjw/_TmOk2h3mIgRc7Z0Uw1kYLx7bIDaZ-Z4wCLcB/s1600/Screenshot_2.jpg)
-
-- Untuk memperindah aplikasi, kita dapat mengganti tema aplikasi pada menu `Design`.
-
-    ![design](https://4.bp.blogspot.com/-HSXimyvqUVc/WNfs9sGUKnI/AAAAAAAAGj0/l3ZyZX2biuUa05VhnVdwrdFcCxxpGWv0gCLcB/s1600/Screenshot_3.jpg)
-
-
-
-# Maintenance
-[`^ kembali ke atas ^`](#)
-
-Ketika kita ingin memodifikasi toko yang sudah terinstall, kita mungkin tidak ingin ada orang lain yang membuka aplikasi kita. Pada saat seperti itu, kita dapat mengkonfigurasi aplikasi kita untuk masuk ke dalam *maintenance mode*. Berikut ini adalah langkah-langkah yang harus kita lakukan :
-1. Login ke dalam admin toko kita.
-2. Klik submenu **General** pada menu **Shop Parameters**.
-
-    ![shop](https://2.bp.blogspot.com/-jD8tqsXFEZU/WNgF9oM9htI/AAAAAAAAGkE/y5imPsRHlC8WE4FWW_4Ypt7B5qldQwGOACLcB/s1600/Screenshot_4.jpg)
-
-3. pilih tab **Maintenance**.
-
-    ![maintenance](https://2.bp.blogspot.com/-nP-fEgmv0Nk/WNgF9liISII/AAAAAAAAGkM/79LNJAoksb0J5dhVSqpo2Q4mZf3G4z-YwCLcB/s1600/Screenshot_5.jpg)
-
-4. Klik tombol `on` atau `off` untuk menjalankan atau mematikan *maintenance mode*.
-5. Jika kita ingin agar teman kita dapat membuka aplikasi saat sedang dalam *maintenance mode*, masukkan **IP Adress** miliknya ke dalam field **Maintenance IP**.
-6. Tuliskan pesan yang ingin kita sampaikan ketika ada orang yang membuka aplikasi kita saat sedang maintenance ke dalam field **Custom Maintenance Text**
-7. Klik tombol **Save** untuk menyimpan perubahan.
-
-
-
-# Otomatisasi
-[`^ kembali ke atas ^`](#)
-
-Jika kalian masih merasa kesulitan dalam meng-install **Prestashop**, terdapat dua cara alternatif yang lebih mudah. Cara pertama adalah dengan menggunakan `script shell` yang otomatis akan menjalankan semua perintah instalasi pada terminal. Contoh `script shell` yang dapat kita gunakan adalah [setup.sh](../master/setup.sh)
-
-Cara kedua adalah dengan menggunakan layanan yang tersedia pada *web-hosting provider*. Dengan layanan tersebut kita hanya perlu satu kali klik untuk meng-install **Prestashop**. Berikut langkah-lankah untuk melakukannya :
-1. kita perlu mengunjungi *web-hosting provider* yang menyediakan *script* instalasi **prestashop** otomatis, seperti [SimpleScripts](http://www.simplescripts.com/script_details/install:PrestaShop), [Installatron](http://installatron.com/prestashop), atau [Softaculous](http://www.softaculous.com/apps/ecommerce/PrestaShop).
-2. Sebagai contoh, kita akan menggunakan layanan dari [Installatron](http://installatron.com/prestashop). Kunjungi link tersebut lalu klik tombol **Install this Application**.
-
-    ![Installatron](https://4.bp.blogspot.com/-PGjmovGOoOc/WNgQDHbE1RI/AAAAAAAAGk0/90dTTmH15cY6WSWqr8UU8BPETQs4KyxnACLcB/s1600/Screenshot_8.jpg)
-
-3. Isi semua informasi yang dibutuhkan, lalu klik tombol **Install**.
-
-    ![form](https://4.bp.blogspot.com/-5UwbsHAaBe0/WNgQDDjFdhI/AAAAAAAAGk4/coOLiqqP2DcVxq-hHwFa9cVW3P_t6p1tQCLcB/s1600/ss2.png)
-
-4. Tunggu hingga proses instalasi selesai.
-
-
 
 # Cara Pemakaian
 [`^ kembali ke atas ^`](#)
