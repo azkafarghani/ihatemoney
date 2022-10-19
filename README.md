@@ -185,22 +185,20 @@ Terdapat dua pilihan yaitu masuk ke project yang sudah ada, atau membuat project
 
 8. Selain itu, terdapat juga menu untuk menambah projek baru, melihat riwayat penggunaan web oleh user, dan juga menu pengaturan.
 
-    <img src="https://user-images.githubusercontent.com/78604686/196502878-1a5ce750-3450-44c7-be65-243a51f8c81d.png" width="600px" height="auto">v
-
+    <img src="https://user-images.githubusercontent.com/78604686/196502878-1a5ce750-3450-44c7-be65-243a51f8c81d.png" width="600px" height="auto">
 
 
 # Pembahasan
 [`^ kembali ke atas ^`](#)
 
-**ihatemoney** ditulis dalam bahasa pemrograman `PHP` yang support untuk penggunaan MySQL. Sebagai salah satu CMS yang paling banyak digunakan di dunia, aplikasi ini menawarkan berbagai kelebihan, diantaranya :
-- Aplikasi memiliki panel administrasinya mudah digunakan dan fleksibel, sehingga dapat disesuaikan dengan kebutuhan.
-- Mendukung berbagai layanan pembayaran utama, seperti `PayPal`, `VISA`, `MasterCard`, dan `Maestro`.
-- Diterjemahkan dalam banyak bahasa, termasuk Bahasa Indonesia.
-- Memiliki desain yang *responsive*, sehingga dapat dibuka menggunakan *device* apapun.
-- Memiliki lebih dari tiga ratus fitur untuk memudahkan pengguna.
-- Banyak pengguna yang berkontribusi pada *discussion boards* dan sejenisnya, sehingga masalah yang dihadapi pengguna dapat cepat terselesaikan.
+**ihatemoney** ditulis dalam bahasa pemrograman `Python`, menggunakan `flash` framework. Sebagai salah satu aplikasi yang digunakan dalam pengelolaan keuangan bersama, **ihatemoney** memiliki kelebihan antara lain :
+- Tampilan interface yang sederhana dan mudah digunakan oleh orang awam.
+- Pengguna dapat mengundang orang lain ke proyek yang dibuat dengan cara membagikan ID dan kode, tautan, ataupun mengirim undangan melalui surel sehingga pengelolaan keuangan bersama lebih transparan.
+- Item tagihan atau daftar transaksi yang termasuk ke dalam data proyek dapat diunduh oleh pengguna. 
+- Aplikasi tersedia dalam banyak pilihan bahasa dan juga pilihan mata uang sesuai dengan kebutuhan pengguna.
+- Pengguna dapat melihat semua riwayat aktivitas yang sudah dilakukan di dalam aplikasi.
 
-Tentu saja, sebuah aplikasi pasti memiliki kekurangan. Kekurangan yang dimiliki **Prestashop** antara lain :
+Tentu saja, sebuah aplikasi pasti memiliki kekurangan. Kekurangan yang dimiliki **ihatemoney** antara lain :
 - Penggunaan fitur atau modul yang lengkap menyebakan proses loading dari aplikasi ini menjadi sangat lambat
 - Penggunaan *resource* memory aplikasi ini cukup besar, terutama ketika menggunakan fitur atau modul yang lengkap.
 - Sebagian besar modul dan tema yang tersedia tidak gratis.
