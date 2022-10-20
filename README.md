@@ -202,12 +202,11 @@ Tentu saja, sebuah aplikasi pasti memiliki kekurangan. Kekurangan yang dimiliki 
 - Pengguna harus menginput secara manual data-data yang akan digunakan sehingga jika ada kesalahan input akan menimbulkan kesalahan dalam perhitungan juga.
 - Belum banyak orang yang mengetahui tentang aplikasi ini.
 
-Jika dibandingkan dengan CMS sejenisnya seperti **Microweber**, CMS ini memiliki beberapa keunggulan dan kelemahan. Berikut adalah beberapa perbandingan antara kedua CMS ini :
-- **Microweber** menyediakan proses design yang fleksibel dengan fitur *Drag and Drop* tanpa batasan, sehingga pengguna bebas mengkreasikan tampilan websitenya. Sedangkan **Prestashop** hanya menyediakan fitur design berupa penggantian template dan logo, adapun template yang tersedia tidak gratis.
-- Modul atau plugin yang tersedia pada **Prestashop** jauh lebih banyak dibandingkan pada **Microweber**.
-- **Prestashop** memiliki pengguna yang jauh lebih banyak daripada **Microweber** yang aktif pada forum-forum diskusi untuk membantu pengguna pemula.
-- **Microweber** lebih ringan daripada **Prestashop** karena modulnya yang sedikit.
-- Proses instalasi **Prestashop** lebih mudah karena berbasis PHP saja, sedangkan **Microweber** menggunakan framework laravel sehingga proses instalasi lebih sulit, terutama dalam hal *dependency*.
+Ihatemoney tentunya bukan satu-satunya aplikasi pencatatan keuangan/tagihan, salah satu contoh aplikasi lain adalah **HomeBank**. Jika dibandingkan, ihatemoney memiliki beberapa kelebihan dan kekurangan, di antaranya:
+- **Ihatemoney** dibuat dengan sangat sederhana yang memungkinkan penggunanya cepat mengerti untuk pemakaiannya. Sedangkan **HomeBank** lebih rumit yang menyebabkan pengguna perlu mempelajari lebih lama.
+- Fitur manajemen uang pada **HomeBank** jauh lebih banyak dibandingkan pada **ihatemoney**. Namun, jika berfokus pada *shared budget management* maka **ihatemoney** tetap lebih baik karena lebih mendetail untuk pembayaran tagihan
+- **ihatemoney** dapat digunakan langsung pada website sedangkan **HomeBank** harus diunduh terlebih dahulu.
+
 
 
 
@@ -216,4 +215,5 @@ Jika dibandingkan dengan CMS sejenisnya seperti **Microweber**, CMS ini memiliki
 
 1. [About #ihatemoney](https://ihatemoney.org/) - ihatemoney
 2. [ihatemoney documentation](https://ihatemoney.readthedocs.io/en/latest/) - ihatemoney
+2. [ihatemoney alternatives](https://alternativeto.net/software/ihatemoney/) - alternativeto
 
